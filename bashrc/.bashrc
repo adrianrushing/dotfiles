@@ -32,3 +32,6 @@ unset __conda_setup
 
 
 export PATH=$PATH:/home/adrian/.spicetify
+export PATH="$HOME/bin:$PATH"
+alias discord='/usr/bin/discord'
+
