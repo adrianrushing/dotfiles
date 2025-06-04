@@ -6,10 +6,8 @@ eval "$(starship init bash)"
 
 # export PATH="/home/adrian/miniconda3/bin:$PATH"  # commented out by conda initialize
 
-
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
-
 
 alias ls='ls --color=auto'
 alias grep='grep --color=auto'
@@ -17,7 +15,7 @@ PS1='[\u@\h \w]\$ '
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/home/adrian/miniconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+__conda_setup="$('/home/adrian/miniconda3/bin/conda' 'shell.bash' 'hook' 2>/dev/null)"
 if [ $? -eq 0 ]; then
     eval "$__conda_setup"
 else
@@ -30,8 +28,6 @@ fi
 unset __conda_setup
 # <<< conda initialize <<<
 
-
 export PATH=$PATH:/home/adrian/.spicetify
 export PATH="$HOME/bin:$PATH"
 alias discord='/usr/bin/discord'
-
