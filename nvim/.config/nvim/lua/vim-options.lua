@@ -24,3 +24,7 @@ vim.api.nvim_create_autocmd("InsertLeave", {
     vim.opt.relativenumber = true
   end,
 })
+vim.keymap.set("n", "<c-k>", ":wincmd k<CR>")
+vim.keymap.set("n", "<c-j>", ":wincmd j<CR>")
+vim.keymap.set("n", "<c-h>", ":wincmd h<CR>")
+vim.keymap.set("n", "<c-l>", ":wincmd l<CR>")
