@@ -23,7 +23,7 @@ return {
     }
 
     -- Other settings
-    vim.g.vim_markdown_folding_disabled = 0 -- Enable folding
+    vim.g.vim_markdown_folding_disabled = 1 -- Disable folding (was 0)
     vim.g.vim_markdown_folding_level = 2 -- Fold from level 2 headers
     vim.g.vim_markdown_toc_autofit = 1
     vim.g.vim_markdown_emphasis_multiline = 1
