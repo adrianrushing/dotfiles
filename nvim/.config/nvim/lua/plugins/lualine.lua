@@ -1,11 +1,11 @@
-return { 
+return {
   'nvim-lualine/lualine.nvim',
-  dependencies = { 'nvim-tree/nvim-web-devicons' },
-  config = function()
-    require('lualine').setup({
-    options = {
-      theme = 'gruvbox'
+  config = function() 
+    require('lualine').setup{
+      options = {
+        icons_enabled = true,
+        theme = 'auto'  -- Automatically detects and matches your colorscheme
+      }
     }
-    })
   end
 }

@@ -22,5 +22,6 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
 
 require("vim-options")
--- Setup lazy.nvim
+-- Setup lazy.nvim  
+-- Only loads .lua files directly in lua/plugins/, not subdirectories
 require("lazy").setup("plugins")
