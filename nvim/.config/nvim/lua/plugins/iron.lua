@@ -13,7 +13,7 @@ return {
             command = { "bash" },
           },
           python = {
-            command = { "python3" }, -- or { "ipython", "--no-autoindent" }
+            command = { "ipython", "--no-autoindent" },
             format = common.bracketed_paste_python,
             block_dividers = { "# %%", "#%%" },
           },
@@ -52,5 +52,8 @@ return {
     -- Additional keymaps for commands
     vim.keymap.set("n", "<space>rf", "<cmd>IronFocus<cr>", { desc = "Iron Focus" })
     vim.keymap.set("n", "<space>rh", "<cmd>IronHide<cr>", { desc = "Iron Hide" })
+    vim.keymap.set("n", "<space>cl", function()
+      require("iron.core").send(nil, { "\x0c" }) -- Send Ctrl-L to clear
+    end, { desc = "Iron Clear REPL" })
   end,
 }
