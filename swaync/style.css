@@ -1,31 +1,29 @@
-/* Gruvbox Dark Theme */
+/* Everforest Dark Medium Theme */
 
-@define-color bg0_h           #1d2021;
-@define-color bg0             #282828;
-@define-color bg1             #3c3836;
-@define-color bg2             #504945;
-@define-color bg3             #665c54;
-@define-color bg4             #7c6f64;
-@define-color gray            #928374;
-@define-color fg4             #a89984;
-@define-color fg3             #bdae93;
-@define-color fg2             #d5c4a1;
-@define-color fg1             #ebdbb2;
-@define-color fg0             #fbf1c7;
-@define-color red             #cc241d;
-@define-color bright_red      #fb4934;
-@define-color green           #98971a;
-@define-color bright_green    #b8bb26;
-@define-color yellow          #d79921;
-@define-color bright_yellow   #fabd2f;
-@define-color blue            #458588;
-@define-color bright_blue     #83a598;
-@define-color purple          #b16286;
-@define-color bright_purple   #d3869b;
-@define-color aqua            #689d6a;
-@define-color bright_aqua     #8ec07c;
-@define-color orange          #d65d0e;
-@define-color bright_orange   #fe8019;
+@define-color bg_dim #232A2E;
+@define-color bg0 #2D353B;
+@define-color bg1 #343F44;
+@define-color bg2 #3D484D;
+@define-color bg3 #475258;
+@define-color bg4 #4F585E;
+@define-color bg5 #56635f;
+@define-color bg_visual #543A48;
+@define-color bg_red #514045;
+@define-color bg_yellow #4D4C43;
+@define-color bg_green #425047;
+@define-color bg_blue #3A515D;
+
+@define-color fg #D3C6AA;
+@define-color red #E67E80;
+@define-color orange #E69875;
+@define-color yellow #DBBC7F;
+@define-color green #A7C080;
+@define-color aqua #83C092;
+@define-color blue #7FBBB3;
+@define-color purple #D699B6;
+@define-color grey0 #7A8478;
+@define-color grey1 #859289;
+@define-color grey2 #9DA9A0;
 
 * {
   font-family: "JetBrainsMono Nerd Font";
@@ -40,15 +38,15 @@
 
 .notification-row {
   outline: none;
-  margin: 10px;
+  margin: 6px;
   padding: 0;
 }
 
 .notification {
   background: @bg1;
-  border-radius: 10px;
+  border-radius: 12px;
   margin: 0px;
-  border: 2px solid @bg2;
+  border: none;
   padding: 0px;
 }
 
@@ -59,8 +57,8 @@
 }
 
 .close-button {
-  background: @red;
-  color: @fg0;
+  background: @surface2;
+  color: @text;
   text-shadow: none;
   padding: 0;
   border-radius: 5px;
@@ -74,7 +72,7 @@
 
 .close-button:hover {
   box-shadow: none;
-  background: @bright_red;
+  background: @red;
   transition: all 0.15s ease-in-out;
   border: none;
 }
@@ -147,8 +145,8 @@
 
 .control-center {
   background: @bg0_h;
-  border: 2px solid @bg2;
-  border-radius: 10px;
+  border: none;
+  border-radius: 12px;
 }
 
 .control-center-list {
@@ -175,7 +173,7 @@
   font-size: 1.5rem;
 }
 
-.widget-title > button {
+.widget-title>button {
   font-size: 1rem;
   color: @fg1;
   text-shadow: none;
@@ -186,7 +184,7 @@
   padding: 5px 10px;
 }
 
-.widget-title > button:hover {
+.widget-title>button:hover {
   background: @bg3;
   color: @fg0;
 }
@@ -197,7 +195,7 @@
   font-size: 1.1rem;
 }
 
-.widget-dnd > switch {
+.widget-dnd>switch {
   font-size: initial;
   border-radius: 10px;
   background: @bg2;
@@ -205,11 +203,11 @@
   box-shadow: none;
 }
 
-.widget-dnd > switch:checked {
+.widget-dnd>switch:checked {
   background: @yellow;
 }
 
-.widget-dnd > switch slider {
+.widget-dnd>switch slider {
   background: @fg1;
   border-radius: 10px;
 }
@@ -219,7 +217,7 @@
   margin: 10px;
 }
 
-.widget-label > label {
+.widget-label>label {
   font-size: 1.1rem;
   color: @fg1;
 }
@@ -234,7 +232,7 @@
   border: 1px solid @bg2;
 }
 
-.widget-mpris > box > button {
+.widget-mpris>box>button {
   border-radius: 10px;
 }
 
@@ -249,7 +247,7 @@
   color: @fg1;
 }
 
-.widget-volume > box > button {
+.widget-volume>box>button {
   background: @bg2;
   border: none;
 }

@@ -58,9 +58,7 @@
     "backlight",            // brightness
 
     "custom/left8",
-    //"battery",              // battery
-    "custom/hypridle_mode",
-
+    "battery",              // battery
 
     "custom/leftin2",
     "custom/power"          // power button
@@ -380,13 +378,6 @@
     "interval": 1,
     "min-length": 6,
     "max-length": 6
-  },
-  "custom/hypridle_mode": {
-    "exec": "~/.config/waybar/scripts/hypridle_mode.sh",
-    "return-type": "json",
-    "interval": 2,
-    "tooltip": false,
-    "on-click": "~/.config/hypr/toggle-hypridle.sh toggle"
   },
 
   "custom/power": {
