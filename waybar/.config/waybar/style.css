@@ -1,0 +1,126 @@
+/* ──────────────────────────────────────────────────────────────────────────
+   BATMAN (2022) RE-THEME
+   ────────────────────────────────────────────────────────────────────────── */
+
+waybar * {
+  border: 4px;
+  border-radius: 4px;
+  min-height: 0;
+  font-family: "JetBrainsMono Nerd Font";
+  font-size: 14px;
+}
+
+#waybar {
+  background-color: transparent;
+  border-radius: 2px;
+}
+
+window#waybar {
+  background: #0D090B;
+  color: #7C9EA6;
+  border: 3px solid #734343;
+}
+
+#workspaces {
+  background-color: transparent;
+}
+
+#workspaces button {
+  all: initial;
+  min-width: 0;
+  box-shadow: inherit;
+  padding: 6px 8px;
+  margin: 6px 2px;
+  border-radius: 2px;
+  background-color: #201F26;
+  border: 2px solid #4C6C73;
+  color: #7C9EA6;
+  font-family: "JetBrainsMono Nerd Font";
+  font-size: 14px;
+}
+
+#workspaces button.active {
+  color: #fab387;
+  background-color: #201F26;
+  border: 2px solid #734343;
+}
+
+#workspaces button:hover {
+  color: #201F26;
+  background-color: #7C9EA6;
+}
+
+#custom-microphone,
+#bluetooth,
+#custom-brightness,
+#custom-volume,
+#custom-power,
+#network,
+#battery,
+#clock {
+  padding: 6px 12px;
+  margin: 6px 6px;
+  background-color: #201F26;
+  border: 2px solid #4C6C73;
+  border-radius: 2px;
+  color: #7C9EA6;
+}
+
+#bluetooth.disabled {
+  color: #734343;
+}
+
+#network.disconnected {
+  background-color: #592533;
+  color: #7C9EA6;
+}
+
+#clock {
+  font-weight: bold;
+  font-size: 12px;
+  color: #734343;
+}
+
+#battery {
+  border-radius: 2px;
+  font-weight: normal;
+}
+
+#battery.critical {
+  background-color: #592533;
+  color: white;
+  padding: 2px 6px;
+  border-radius: 6px;
+  font-weight: bold;
+}
+
+#battery.warning {
+  background-color: #734343;
+  color: #0D090B;
+  padding: 2px 6px;
+  border-radius: 6px;
+}
+
+#custom-microphone:hover,
+#custom-volume:hover,
+#network:hover,
+#bluetooth:hover,
+#custom-power:hover,
+#battery:hover,
+#custom-brightness:hover,
+#clock:hover {
+  background-color: #4C6C73;
+  border: 2px solid #734343;
+  color: #0D090B;
+}
+
+tooltip {
+  color: #7C9EA6;
+  background-color: #0D090B;
+  border: 1px solid #734343;
+  font-weight: bold;
+}
+
+tooltip label {
+  color: #7C9EA6;
+}
