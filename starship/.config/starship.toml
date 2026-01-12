@@ -22,10 +22,10 @@ $python\
 [](fg:color_blue bg:color_bg3)\
 $docker_context\
 $conda\
-[](fg:color_bg3 bg:color_bg1)\
+[](fg:color_bg3)\
 $line_break$character"""
 # $time\ 
-# [ ](fg:color_bg1)\
+# [ ](fg:color_bg1)\
 
 
 palette = 'gruvbox_dark'
