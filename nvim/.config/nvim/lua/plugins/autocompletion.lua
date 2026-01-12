@@ -67,16 +67,16 @@ return { -- Autocompletion
           luasnip.lsp_expand(args.body)
         end,
       },
-      completion = { completeopt = "menu,menuone,noinsert" },
+      completion = { completeopt = "menu,menuone,noselect" },
       -- window = {
       --     completion = cmp.config.window.bordered(),
       --     documentation = cmp.config.window.bordered(),
       -- },
       mapping = cmp.mapping.preset.insert({
-        ["<C-j>"] = cmp.mapping.select_next_item(),    -- Select the [n]ext item
-        ["<C-k>"] = cmp.mapping.select_prev_item(),    -- Select the [p]revious item
-        ["<CR>"] = cmp.mapping.confirm({ select = true }), -- Accept the completion with Enter.
-        ["<C-c>"] = cmp.mapping.complete({}),          -- Manually trigger a completion from nvim-cmp.
+        ["<C-j>"] = cmp.mapping.select_next_item(),         -- Select the [n]ext item
+        ["<C-k>"] = cmp.mapping.select_prev_item(),         -- Select the [p]revious item
+        ["<CR>"] = cmp.mapping.confirm({ select = false }), -- Accept the completion with Enter.
+        ["<C-c>"] = cmp.mapping.complete({}),               -- Manually trigger a completion from nvim-cmp.
 
         -- Think of <c-l> as moving to the right of your snippet expansion.
         --  So if you have a snippet that's like:
