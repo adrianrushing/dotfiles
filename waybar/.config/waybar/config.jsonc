@@ -25,21 +25,21 @@
   // ── Clock ────────────────────────────────────────────────────────
   "clock": {
     "tooltip-format": "{calendar}",
-    "format-alt": "  {:%a, %d %b %Y}",
-    "format": "[   {:%I:%M %p} ]"
+    "format-alt": "{:%m-%d-%Y}",
+    "format": "{:%I:%M %p} "
   },
   // ── Network ──────────────────────────────────────────────────────
   "network": {
     "format-wifi": "{icon}",
     "format-icons": [
-      "[ 󰤯  ]",
-      "[ 󰤟  ]",
-      "[ 󰤢  ]",
-      "[ 󰤥  ]",
-      "[ 󰤨  ]"
+      "󰤯",
+      "󰤟",
+      "󰤢",
+      "󰤥",
+      "󰤨"
     ],
-    "format-ethernet": "[ 󰀂 ]",
-    "format-disconnected": "[ 󰖪 ]",
+    "format-ethernet": "󰀂",
+    "format-disconnected": "󰖪",
     "tooltip-format-wifi": "{icon} {essid}\n⇣{bandwidthDownBytes}  ⇡{bandwidthUpBytes}",
     "tooltip-format-disconnected": "Disconnected",
     "on-click": "networkmanager_dmenu"
@@ -48,8 +48,8 @@
   "bluetooth": {
     "format": "{icon}",
     "format-icons": {
-      "enabled": "[  ]",
-      "disabled": "[ 󰂲 ]"
+      "enabled": "",
+      "disabled": "󰂲"
     },
     "on-click": "~/.config/waybar/scripts/bluetooth-toggle.sh",
     "tooltip-format": "Bluetooth is {status}",
@@ -110,7 +110,7 @@
   },
   // ── Workspaces ───────────────────────────────────────────────────
   "hyprland/workspaces": {
-    "format": "[{icon}]",
+    "format": "{icon}",
     "format-icons": {
       "1": "I",
       "2": "II",
@@ -131,7 +131,7 @@
   },
   // ── Power ────────────────────────────────────────────────────────
   "custom/power": {
-    "format": "[ 󰤆 ]",
+    "format": "󰤆",
     "tooltip": true,
     "tooltip-format": "Power Menu",
     "on-click": "~/.config/waybar/scripts/powermenu.sh"

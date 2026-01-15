@@ -15,7 +15,7 @@ PS1='[\u@\h \w]\$ '
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/home/adrian/miniconda3/bin/conda' 'shell.bash' 'hook' 2>/dev/null)"
+__conda_setup="$('/home/adrian/miniconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
 if [ $? -eq 0 ]; then
     eval "$__conda_setup"
 else
@@ -31,3 +31,5 @@ unset __conda_setup
 export PATH=$PATH:/home/adrian/.spicetify
 export PATH="$HOME/bin:$PATH"
 alias discord='/usr/bin/discord'
+
+. "$HOME/.local/bin/env"
