@@ -45,47 +45,56 @@ require('lazy').setup({
   --
   -- Then, because we use the `opts` key (recommended), the configuration runs
   -- after the plugin has been loaded as `require(MODULE).setup(opts)`.
-      -- NOTE: Plugins can specify dependencies.
+  -- NOTE: Plugins can specify dependencies.
   --
   -- The dependencies are proper plugin specifications as well - anything
   -- you do for a plugin at the top level, you can do for a dependency.
   --
   -- Use the `dependencies` key to specify the dependencies of a particular plugin
 
-    require 'kickstart.plugins.gitsigns',
+  require 'kickstart.plugins.gitsigns',
 
-    require 'kickstart.plugins.which-key',
+  require 'kickstart.plugins.which-key',
 
-    require 'kickstart.plugins.telescope',
+  require 'kickstart.plugins.telescope',
 
-    require 'kickstart.plugins.lspconfig',
+  require 'kickstart.plugins.lspconfig',
 
-    require 'kickstart.plugins.conform',
+  require 'kickstart.plugins.conform',
 
-    require 'kickstart.plugins.blink',
+  require 'kickstart.plugins.blink',
 
-    require 'kickstart.plugins.tokyonight',
+  require 'kickstart.plugins.tokyonight',
 
-    require 'kickstart.plugins.mini',
+  require 'kickstart.plugins.mini',
 
-    require 'kickstart.plugins.todo-comments',
+  require 'kickstart.plugins.todo-comments',
 
-    require 'kickstart.plugins.treesitter',
+  require 'kickstart.plugins.treesitter',
 
-    require 'kickstart.plugins.gitsigns', -- adds gitsigns recommend keymaps
+  require 'kickstart.plugins.gitsigns', -- adds gitsigns recommend keymaps
 
-    -- require 'kickstart.plugins.debug',
+  -- require 'kickstart.plugins.debug',
 
-    -- require 'kickstart.plugins.indent_line',
+  -- require 'kickstart.plugins.indent_line',
 
-    -- require 'kickstart.plugins.lint',
+  -- require 'kickstart.plugins.lint',
 
-    -- require 'kickstart.plugins.autopairs',
+  -- require 'kickstart.plugins.autopairs',
 
-    require 'kickstart.plugins.neo-tree',
+  require 'kickstart.plugins.neo-tree',
 
-  },
-  {
+  -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
+  --    This is the easiest way to modularize your config.
+  --
+  --  Uncomment the following line and add your plugins to `lua/custom/plugins/*.lua` to get going.
+  { import = 'custom.plugins' },
+  --
+  -- For additional information with loading, sourcing and examples see `:help lazy.nvim-🔌-plugin-spec`
+  -- Or use telescope!
+  -- In normal mode type `<space>sh` then write `lazy.nvim-plugin`
+  -- you can continue same window with `<space>sr` which resumes last telescope search,
+}, {
   ui = {
     -- If you are using a Nerd Font: set icons to an empty table which will use the
     -- default lazy.nvim defined Nerd Font icons, otherwise define a unicode icons table
