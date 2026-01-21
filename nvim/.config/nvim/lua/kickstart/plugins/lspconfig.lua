@@ -8,7 +8,7 @@ return {
     ft = 'lua',
     opts = {
       library = {
-        -- Load luvit types when the `vim.uv` word is found
+        -- Load luvit types when the `vim.uv` word is foundindent
         { path = '${3rd}/luv/library', words = { 'vim%.uv' } },
       },
     },
@@ -54,6 +54,8 @@ return {
 
           -- Find references for the word under your cursor.
           map('grr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
+
+          map('K', vim.lsp.buf.hover, 'Hover Documentation')
 
           -- Jump to the implementation of the word under your cursor.
           --  Useful when your language has ways of declaring types without an actual implementation.
@@ -182,8 +184,21 @@ return {
       local servers = {
         -- clangd = {},
         -- gopls = {},
-        pyright = {},
+        -- pyright = {},
+        -- PYTHON
         basedpyright = {},
+
+        ruff = {
+          -- This function runs when Ruff specifically attaches to a buffer
+          on_attach = function(client)
+            -- Disable hover and completion because basedpyright handles them
+            client.server_capabilities.hoverProvider = false
+            client.server_capabilities.completionProvider = false
+          end,
+          -- (Optional) If you want Ruff to only handle linting and not formatting:
+          -- settings = { lint = { run = "onSave" } }
+        },
+
         -- rust_analyzer = {},
         -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
         --
@@ -191,9 +206,31 @@ return {
         --    https://github.compmizio/typescript-tools.nvim
         --
         -- But for many setups, the LSP (`ts_ls`) will work just fine
-        -- ts_ls = {},
-        --
-
+        --- TYPESCRIPT
+        ts_ls = {
+          capabilities = {
+            documentFormattingProvider = false,
+            documentRangeFormattingProvider = false,
+          },
+          settings = {
+            typescript = {
+              implementationsCodeLens = true,
+              referencesCodeLens = true,
+              format = {
+                indentSize = 2,
+                tabSize = 2,
+              },
+            },
+            javascript = {
+              format = {
+                indentSize = 2,
+                tabSize = 2,
+              },
+            },
+          },
+        },
+        tailwindcss = {},
+        biome = {},
         lua_ls = {
           -- cmd = { ... },
           -- filetypes = { ... },
@@ -201,7 +238,7 @@ return {
           settings = {
             Lua = {
               completion = {
-                callSnippet = 'Replace',
+                -- callSnippet = 'Replace',
               },
               -- You can toggle below to ignore Lua_LS's noisy `missing-fields` warnings
               -- diagnostics = { disable = { 'missing-fields' } },
@@ -226,6 +263,7 @@ return {
       local ensure_installed = vim.tbl_keys(servers or {})
       vim.list_extend(ensure_installed, {
         'stylua', -- Used to format Lua code
+        'biome',
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 

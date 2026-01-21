@@ -52,7 +52,7 @@ require('lazy').setup({
   --
   -- Use the `dependencies` key to specify the dependencies of a particular plugin
 
-  require 'kickstart.plugins.gitsigns',
+  -- require 'kickstart.plugins.gitsigns',
 
   require 'kickstart.plugins.which-key',
 
@@ -80,7 +80,7 @@ require('lazy').setup({
 
   -- require 'kickstart.plugins.lint',
 
-  -- require 'kickstart.plugins.autopairs',
+  require 'kickstart.plugins.autopairs',
 
   require 'kickstart.plugins.neo-tree',
 

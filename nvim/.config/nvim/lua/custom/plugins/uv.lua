@@ -2,7 +2,7 @@ return {
   {
     'benomahony/uv.nvim',
 
-    dependencies = { 'folke/snacks.nvim' },
+    dependencies = { 'nvim-telescope/telescope.nvim' },
     opts = {
       -- Auto-activate virtual environments when found
       auto_activate_venv = true,
@@ -30,7 +30,7 @@ return {
       },
 
       -- Execution options
-      exeqution = {
+      execution = {
         -- Python run command template
         run_command = 'uv run python',
 

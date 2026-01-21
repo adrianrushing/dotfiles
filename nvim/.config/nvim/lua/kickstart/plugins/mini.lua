@@ -1,4 +1,5 @@
-return { { -- Collection of various small independent plugins/modules
+return {
+  { -- Collection of various small independent plugins/modules
     'echasnovski/mini.nvim',
     config = function()
       -- Better Around/Inside textobjects
@@ -11,12 +12,23 @@ return { { -- Collection of various small independent plugins/modules
 
       -- Add/delete/replace surroundings (brackets, quotes, etc.)
       --
-      -- - saiw) - [S]urround [A]dd [I]nner [W]ord [)]Paren
+      -- - saiw) - [S]urround [A]dd [I]nner [W]ord [)]Pren
       -- - sd'   - [S]urround [D]elete [']quotes
-      -- - sr)'  - [S]urround [R]eplace [)] [']
+      -- - sr)'  - [S]urround [R]eplce [)] [']
       require('mini.surround').setup()
 
-      -- Simple and easy statusline.
+      local indentscope = require 'mini.indentscope'
+      indentscope.setup {
+
+        symbol = '│', -- Use the box-drawing character for a continuous line
+        draw = {
+          delay = 0,
+          -- This ensures the line is drawn immediately without animation
+          animation = indentscope.gen_animation.none(),
+        },
+      }
+
+      -- Simple nd esy statusline.
       --  You could remove this setup call if you don't like it,
       --  and try some other statusline plugin
       local statusline = require 'mini.statusline'
@@ -36,3 +48,5 @@ return { { -- Collection of various small independent plugins/modules
     end,
   },
 }
+
+-- vim: ts=2 sts=2 sw=2 et

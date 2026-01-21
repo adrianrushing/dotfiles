@@ -21,7 +21,7 @@ return {
       --   dockerfile = { "hadolint" },
       --   inko = { "inko" },
       --   janet = { "janet" },
-      --   json = { "jsonlint" },
+      json = { 'jsonlint' }
       --   markdown = { "vale" },
       --   rst = { "vale" },
       --   ruby = { "ruby" },
