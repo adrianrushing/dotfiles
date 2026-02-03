@@ -186,7 +186,8 @@ return {
         -- gopls = {},
         -- pyright = {},
         -- PYTHON
-        basedpyright = {},
+        -- basedpyright = {},
+        ty = { completions = { autoImport = true } },
 
         ruff = {
           -- This function runs when Ruff specifically attaches to a buffer
