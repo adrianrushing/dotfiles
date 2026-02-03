@@ -12,4 +12,12 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   end,
 })
 
+vim.api.nvim_create_autocmd('TermOpen', {
+  desc = 'Set terminal to no buffer',
+  group = vim.api.nvim_create_augroup('kickstart-term-no-write', { clear = true }),
+  callback = function()
+    vim.opt_local.buftype = 'nofile'
+  end,
+})
+
 -- vim: ts=2 sts=2 sw=2 et

@@ -174,7 +174,13 @@ return {
         -- Go
         gopls = {},
         -- PYTHON
+<<<<<<< HEAD
         ty = { completions = { autoImport = true } },
+=======
+        -- basedpyright = {},
+        ty = { completions = { autoImport = true } },
+
+>>>>>>> 221ea00 (add: term no longer writes on :w)
         ruff = {
           -- This function runs when Ruff specifically attaches to a buffer
           on_attach = function(client)
