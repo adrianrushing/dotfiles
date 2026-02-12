@@ -8,6 +8,7 @@
   "mason-tool-installer.nvim": { "branch": "main", "commit": "443f1ef8b5e6bf47045cb2217b6f748a223cf7dc" },
   "mason.nvim": { "branch": "main", "commit": "44d1e90e1f66e077268191e3ee9d2ac97cc18e65" },
   "mini.nvim": { "branch": "main", "commit": "f28cd08c8be826355d64080400fab1764c9693dd" },
+  "neogen": { "branch": "main", "commit": "23e7e9f883d01289ebd90e98025acc860ea26366" },
   "neovim-session-manager": { "branch": "master", "commit": "89d253a6c68af60b49570044591d5b8701866601" },
   "nvim-autopairs": { "branch": "master", "commit": "59bce2eef357189c3305e25bc6dd2d138c1683f5" },
   "nvim-lspconfig": { "branch": "master", "commit": "0480b120318ec8bab27b530ffab6ee76a8c4d806" },
