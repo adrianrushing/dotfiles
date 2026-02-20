@@ -74,7 +74,7 @@ require('lazy').setup({
 
   require 'kickstart.plugins.gitsigns', -- adds gitsigns recommend keymaps
 
-  -- require 'kickstart.plugins.debug',
+  require 'kickstart.plugins.debug',
 
   -- require 'kickstart.plugins.indent_line',
 
