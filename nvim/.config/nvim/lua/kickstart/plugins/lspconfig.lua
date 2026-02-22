@@ -117,9 +117,7 @@ return {
           --
           -- This may be unwanted, since they displace some of your code
           if client and client:supports_method('textDocument/inlayHint', event.buf) then
-            map('<leader>th', function()
-              vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = event.buf })
-            end, '[T]oggle Inlay [H]ints')
+            map('<leader>th', function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = event.buf }) end, '[T]oggle Inlay [H]ints')
           end
         end,
       })
@@ -173,12 +171,10 @@ return {
       --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
       local servers = {
         -- clangd = {},
-        -- gopls = {},
-        -- pyright = {},
+        -- Go
+        gopls = {},
         -- PYTHON
-        -- basedpyright = {},
         ty = { completions = { autoImport = true } },
-
         ruff = {
           -- This function runs when Ruff specifically attaches to a buffer
           on_attach = function(client)
@@ -192,11 +188,8 @@ return {
 
         -- rust_analyzer = {},
         -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
-        --
         -- Some languages (like typescript) have entire language plugins that can be useful:
         --    https://github.compmizio/typescript-tools.nvim
-        --
-        -- But for many setups, the LSP (`ts_ls`) will work just fine
         --- TYPESCRIPT
         ts_ls = {
           capabilities = {
@@ -236,6 +229,7 @@ return {
             },
           },
         },
+        marksman = {},
       }
 
       -- Ensure the servers and tools above are installed
