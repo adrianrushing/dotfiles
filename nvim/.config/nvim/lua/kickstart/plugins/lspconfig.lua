@@ -117,9 +117,7 @@ return {
           --
           -- This may be unwanted, since they displace some of your code
           if client and client:supports_method('textDocument/inlayHint', event.buf) then
-            map('<leader>th', function()
-              vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = event.buf })
-            end, '[T]oggle Inlay [H]ints')
+            map('<leader>th', function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = event.buf }) end, '[T]oggle Inlay [H]ints')
           end
         end,
       })
@@ -176,9 +174,7 @@ return {
         -- Go
         gopls = {},
         -- PYTHON
-        -- basedpyright = {},
         ty = { completions = { autoImport = true } },
-
         ruff = {
           -- This function runs when Ruff specifically attaches to a buffer
           on_attach = function(client)
