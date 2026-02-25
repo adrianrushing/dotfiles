@@ -33,3 +33,5 @@ export PATH="$HOME/bin:$PATH"
 alias discord='/usr/bin/discord'
 
 . "$HOME/.local/bin/env"
+
+export PATH="$PATH:$(go env GOPATH)/bin"
