@@ -1,3 +1,5 @@
+vim.cmd 'filetype plugin on'
+
 -- [[  Setting options  ]]
 
 -- NOTE: You can change these options as you wish!
@@ -15,9 +17,7 @@ vim.o.showmode = false
 --  Schedule the setting after `UiEnter` because it can increase startup-time.
 --  Remove this option if you want your OS clipboard to remain independent.
 --  See `:help 'clipboard'`
-vim.schedule(function()
-  vim.o.clipboard = 'unnamedplus'
-end)
+vim.schedule(function() vim.o.clipboard = 'unnamedplus' end)
 
 -- Enable break indent
 vim.o.breakindent = true
@@ -82,5 +82,7 @@ if vim.fn.has 'wsl' == 1 then
 end
 -- Set the default clipboard to the system clipboard (unnamedplus)
 vim.opt.clipboard = 'unnamedplus'
+
+vim.cmd 'filetype plugin on'
 
 -- vim: ts=2 sts=2 sw=2 et
