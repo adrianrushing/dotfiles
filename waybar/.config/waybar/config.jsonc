@@ -42,7 +42,7 @@
     "format-disconnected": "󰖪",
     "tooltip-format-wifi": "{icon} {essid}\n⇣{bandwidthDownBytes}  ⇡{bandwidthUpBytes}",
     "tooltip-format-disconnected": "Disconnected",
-    "on-click": "networkmanager_dmenu"
+    "on-click": "kitty --class impala -e impala"
   },
   // ── Bluetooth ────────────────────────────────────────────────────
   "bluetooth": {
