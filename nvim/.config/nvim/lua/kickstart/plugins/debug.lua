@@ -11,45 +11,50 @@ return {
   },
   keys = {
     {
-      '<leader>dc',
+      '<leader><F5>',
       function() require('dap').continue() end,
-      desc = '[D]ebug: Start/[C]ontinue',
+      desc = 'Debug: Start/Continue',
     },
     {
-      '<leader>di',
-      function() require('dap').step_into() end,
-      desc = '[D]ebug: Step [I]nto',
-    },
-    {
-      '<leader>do',
+      '<leader><F10>',
       function() require('dap').step_over() end,
-      desc = '[D]ebug: Step [O]ver',
+      desc = 'Debug: Step Over',
     },
     {
-      '<leader>du',
+      '<leader><F11>',
+      function() require('dap').step_into() end,
+      desc = 'Debug: Step Into',
+    },
+    {
+      '<leader><F12>',
       function() require('dap').step_out() end,
-      desc = '[D]ebug: Step O[u]t',
+      desc = 'Debug: Step Out',
     },
     {
       '<leader>db',
       function() require('dap').toggle_breakpoint() end,
-      desc = '[D]ebug: Toggle [B]reakpoint',
+      desc = '[D]ebug: Toggle [b]reakpoint',
     },
     {
       '<leader>dB',
       function() require('dap').set_breakpoint(vim.fn.input 'Breakpoint condition: ') end,
-      desc = '[D]ebug: Set Breakpoint',
+      desc = '[D]ebug: Set [B]reakpoint',
     },
     -- Toggle to see last session result. Without this, you can't see session output in case of unhandled exception.
     {
-      '<leader>dr',
+      '<leader>dl',
       function() require('dapui').toggle() end,
-      desc = '[D]ebug: See last session [r]esult.',
+      desc = '[D]ebug: See [l]ast session result.',
     },
     {
       '<leader>dq',
       function() require('dapui').terminate() end,
       desc = '[D]ebug [Q]uit.',
+    },
+    {
+      '<leader>dr',
+      function() require('dap').repl_open() end,
+      desc = '[D]ebug [r]epl open',
     },
   },
   config = function()
@@ -108,6 +113,7 @@ return {
         -- See https://github.com/leoluz/nvim-dap-go/blob/main/README.md#configuring
         detached = vim.fn.has 'win32' == 0,
       },
+      outputMode = 'console',
     }
     local dap_python = require 'dap-python'
     dap_python.setup 'python3'
