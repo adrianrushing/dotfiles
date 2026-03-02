@@ -32,6 +32,9 @@ export PATH=$PATH:/home/adrian/.spicetify
 export PATH="$HOME/bin:$PATH"
 alias discord='/usr/bin/discord'
 
-. "$HOME/.local/bin/env"
+## Only source the file if it exists
+if [ -f "$HOME/.local/bin/env" ]; then
+    . "$HOME/.local/bin/env"
+fi 
 
 export PATH="$PATH:$(go env GOPATH)/bin"
