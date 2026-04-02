@@ -35,13 +35,19 @@ conda() {
 }
 # <<< Lazy Load Conda <<<
 
-export PATH=$PATH:/home/adrian/.spicetify
 export PATH="$HOME/bin:$PATH"
-alias discord='/usr/bin/discord'
 
 ## Only source the file if it exists
 if [ -f "$HOME/.local/bin/env" ]; then
     . "$HOME/.local/bin/env"
-fi 
+fi
 
-export PATH="$PATH:$(go env GOPATH)/bin"
+
+# Go Environment Setup
+export PATH="$PATH:/usr/local/go/bin"
+export GOPATH="$HOME/go"
+export PATH="$PATH:$GOPATH/bin" # THIS FIXES COBRA-CLI
+
+export PATH="$PATH:/bin"
+
+eval "$(starship init bash)"
