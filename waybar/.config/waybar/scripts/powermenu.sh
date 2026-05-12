@@ -1,22 +1,20 @@
 #!/usr/bin/env bash
 # ─────────────────────────────────────────────────────────────────────────────
-#  Rofi Power Menu
+#  Wofi Power Menu
 #  Provides a simple system power menu integrated with Waybar.
-#  Example:
-#      ./powermenu.sh
-#      # Opens a Rofi menu with power options
 # ─────────────────────────────────────────────────────────────────────────────
 
-rofi_command="rofi -dmenu -p Power"
+SCRIPT_DIR="$(dirname "$0")"
 
 options="Shutdown\nReboot\nLogout\nSuspend\nLock"
 
-chosen="$(echo -e "$options" | $rofi_command)"
-case $chosen in
+chosen=$(echo -e "$options" | wofi --dmenu --location=center --width=15% --hide-search --prompt="Power" --style="$SCRIPT_DIR/wofi.css")
+
+case "$chosen" in
     Shutdown) systemctl poweroff ;;
     Reboot) systemctl reboot ;;
     Logout) hyprctl dispatch exit ;;
     Suspend) systemctl suspend ;;
-    Lock) ~/.config/hyprlock/lock.sh ;;
+    Lock) hyprlock ;;
 esac
 

@@ -52,7 +52,7 @@ window#waybar {
 #custom-brightness,
 #custom-volume,
 #custom-power,
-#network,
+#custom-network,
 #battery,
 #clock {
   padding: 6px 12px;
@@ -67,7 +67,10 @@ window#waybar {
   color: #734343;
 }
 
-#network.disconnected {
+
+
+#network.disconnected,
+#custom-network.disconnected {
   background-color: #592533;
   color: #7C9EA6;
 }
@@ -100,6 +103,7 @@ window#waybar {
 #custom-microphone:hover,
 #custom-volume:hover,
 #network:hover,
+#custom-network:hover,
 #bluetooth:hover,
 #custom-power:hover,
 #battery:hover,

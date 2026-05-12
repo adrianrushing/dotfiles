@@ -1,0 +1,62 @@
+/* Wofi Power Menu - Styled to match Waybar theme */
+
+window {
+    margin: 0px;
+    border: 2px solid #4C6C73;
+    border-radius: 4px;
+    background-color: #0D090B;
+    color: #7C9EA6;
+    font-family: "JetBrainsMono Nerd Font";
+    font-size: 14px;
+}
+
+#input {
+    display: none;
+}
+
+#inner-box {
+    border: none;
+    background-color: #0D090B;
+    margin: 8px;
+    text-align: center;
+}
+
+#outer-box {
+    border: none;
+    background-color: #0D090B;
+    margin: 0px;
+}
+
+#scroll {
+    border: none;
+}
+
+#text {
+    color: #7C9EA6;
+    margin: 4px;
+    padding: 6px 12px;
+    border-radius: 4px;
+    border: 2px solid transparent;
+    text-align: center;
+}
+
+#text:selected {
+    background-color: #201F26;
+    border: 2px solid #734343;
+    color: #fab387;
+}
+
+#entry {
+    padding: 0px;
+    text-align: center;
+}
+
+#entry:selected {
+    background-color: #201F26;
+    border: 2px solid #734343;
+}
+
+#entry:hover {
+    background-color: #4C6C73;
+    color: #0D090B;
+}

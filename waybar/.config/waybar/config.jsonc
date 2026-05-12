@@ -11,7 +11,7 @@
   "modules-left": [
     "clock",
     "custom/power",
-    "network",
+    "custom/network",
     "bluetooth",
     "custom/microphone"
   ],
@@ -28,28 +28,20 @@
     "format-alt": "{:%m-%d-%Y}",
     "format": "{:%I:%M %p} "
   },
-  // ── Network ──────────────────────────────────────────────────────
-  "network": {
-    "format-wifi": "{icon}",
-    "format-icons": [
-      "󰤯",
-      "󰤟",
-      "󰤢",
-      "󰤥",
-      "󰤨"
-    ],
-    "format-ethernet": "󰀂",
-    "format-disconnected": "󰖪",
-    "tooltip-format-wifi": "{icon} {essid}\n⇣{bandwidthDownBytes}  ⇡{bandwidthUpBytes}",
-    "tooltip-format-disconnected": "Disconnected",
+  // ── Network (custom) ──────────────────────────────────────────────────────
+  "custom/network": {
+    "exec": "~/.config/waybar/scripts/network-live.sh",
+    "return-type": "json",
+    "interval": 10,
+    "tooltip": true,
     "on-click": "kitty --class impala -e impala"
   },
   // ── Bluetooth ────────────────────────────────────────────────────
   "bluetooth": {
     "format": "{icon}",
     "format-icons": {
-      "enabled": "",
-      "disabled": "󰂲"
+      "enabled": "  ",
+      "disabled": " 󰂲 "
     },
     "on-click": "~/.config/waybar/scripts/bluetooth-toggle.sh",
     "tooltip-format": "Bluetooth is {status}",
