@@ -1,51 +1,19 @@
 #!/bin/bash
 
-STATUS_FILE="/tmp/hypridle_mode_status"
+CURRENT_MODE=$(cat /tmp/hypridle_mode_status 2>/dev/null)
 
-get_mode() {
-    if [ -f "$STATUS_FILE" ]; then
-        cat "$STATUS_FILE"
-    else
-        echo "normal"
-    fi
-}
+if [[ "$1" == "toggle" ]]; then
+  if [[ "$CURRENT_MODE" == "afk" ]]; then
+    MODE="normal"
+  else
+    MODE="afk"
+  fi
+else
+  MODE=${1:-normal}
+fi
 
-set_mode() {
-    echo "$1" > "$STATUS_FILE"
-    if [ "$1" == "normal" ]; then
-        # Start hypridle if not running
-        if ! pidof hypridle > /dev/null; then
-            hypridle &
-        fi
-        notify-send "Hypridle" "Enabled (Normal Mode)"
-    elif [ "$1" == "afk" ]; then
-        # Stop hypridle
-        killall hypridle
-        notify-send "Hypridle" "Disabled (AFK Mode)"
-    fi
-}
+echo "$MODE" >/tmp/hypridle_mode_status
+notify-send "Hypridle" "Mode: $MODE"
 
-toggle() {
-    current=$(get_mode)
-    if [ "$current" == "normal" ]; then
-        set_mode "afk"
-    else
-        set_mode "normal"
-    fi
-}
-
-case "$1" in
-    normal)
-        set_mode "normal"
-        ;;
-    afk)
-        set_mode "afk"
-        ;;
-    toggle)
-        toggle
-        ;;
-    *)
-        echo "Usage: $0 {normal|afk|toggle}"
-        exit 1
-        ;;
-esac
+pkill hypridle
+hypridle &
