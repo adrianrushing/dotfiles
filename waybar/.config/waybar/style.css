@@ -1,4 +1,4 @@
-waybar * {
+* {
   border: 4px;
   border-radius: 4px;
   min-height: 0;
@@ -22,7 +22,7 @@ window#waybar {
 }
 
 #workspaces button {
-  all: initial;
+  /* all: initial; */
   min-width: 0;
   box-shadow: inherit;
   padding: 6px 8px;
@@ -49,6 +49,7 @@ window#waybar {
 
 #custom-microphone,
 #bluetooth,
+#custom-timer,
 #custom-brightness,
 #custom-volume,
 #custom-power,
@@ -105,6 +106,7 @@ window#waybar {
 #network:hover,
 #custom-network:hover,
 #bluetooth:hover,
+#custom-timer:hover,
 #custom-power:hover,
 #battery:hover,
 #custom-brightness:hover,
@@ -112,6 +114,18 @@ window#waybar {
   background-color: #4C6C73;
   border: 2px solid #734343;
   color: #0D090B;
+}
+
+#custom-timer.work {
+  border: 2px solid #734343;
+}
+
+#custom-timer.break {
+  border: 2px solid #4C6C73;
+}
+
+#custom-timer.paused {
+  opacity: 0.85;
 }
 
 tooltip {
