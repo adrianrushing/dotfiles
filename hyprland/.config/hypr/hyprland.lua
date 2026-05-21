@@ -1,6 +1,5 @@
 local terminal = "kitty"
 local fileManager = "thunar"
-local menu = "wofi --show drun -a"
 local mainMod = "SUPER"
 
 hl.monitor({
@@ -21,7 +20,7 @@ hl.env("AQ_DRM_DEVICES", "/dev/dri/card1")
 
 hl.on("hyprland.start", function()
 	hl.exec_cmd("waybar")
-	hl.exec_cmd("swaync")
+	hl.exec_cmd("quickshell --path /home/adrian/dotfiles/quickshell/.config/quickshell")
 	hl.exec_cmd("hyprpaper")
 	hl.exec_cmd("systemctl --user start hyprpolkitagent")
 end)
@@ -124,10 +123,10 @@ hl.bind(mainMod .. " + C", hl.dsp.window.close())
 hl.bind(mainMod .. " + SHIFT + M", hl.dsp.exit())
 hl.bind(mainMod .. " + E", hl.dsp.exec_cmd(fileManager))
 hl.bind(mainMod .. " + V", hl.dsp.window.float())
-hl.bind(mainMod .. " + SPACE", hl.dsp.exec_cmd(menu))
+hl.bind(mainMod .. " + SPACE", hl.dsp.global("quickshell:toggle_launcher"))
 hl.bind(mainMod .. " + P", hl.dsp.window.pseudo())
 hl.bind(mainMod .. " + J", hl.dsp.layout("togglesplit"))
-hl.bind(mainMod .. " + N", hl.dsp.exec_cmd("swaync-client -t -sw"))
+hl.bind(mainMod .. " + N", hl.dsp.global("quickshell:toggle_notification_history"))
 
 hl.bind(mainMod .. " + H", hl.dsp.focus({ direction = "l" }))
 hl.bind(mainMod .. " + SHIFT + J", hl.dsp.focus({ direction = "u" }))
