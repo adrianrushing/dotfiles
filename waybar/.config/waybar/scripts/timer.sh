@@ -59,7 +59,7 @@ switch_phase() {
 }
 
 notify_phase_end() {
-  swaync-client -t "Focus Session Over!" -b "Time to take a well-deserved break." -a "pomodoro" -u critical >/dev/null 2>&1 || true
+  notify-send "Focus Session Over!" "Time to take a well-deserved break." -a "pomodoro" -u critical >/dev/null 2>&1 || true
   paplay /usr/share/sounds/freedesktop/stereo/complete.oga >/dev/null 2>&1 &
 }
 
