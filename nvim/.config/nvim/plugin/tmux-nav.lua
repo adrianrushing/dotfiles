@@ -1,7 +1,3 @@
-vim.pack.add { 'https://github.com/christoomey/vim-tmux-navigator' }
-
-vim.keymap.set('n', '<C-h>', '<cmd>TmuxNavigateLeft<CR>')
-vim.keymap.set('n', '<C-j>', '<cmd>TmuxNavigateDown<CR>')
-vim.keymap.set('n', '<C-k>', '<cmd>TmuxNavigateUp<CR>')
-vim.keymap.set('n', '<C-l>', '<cmd>TmuxNavigateRight<CR>')
-vim.keymap.set('n', '<C-\\>', '<cmd>TmuxNavigatePrevious<CR>')
+-- Navigation between nvim splits and tmux panes is handled by
+-- sindrip/tmux-nvim-navigator (TPM plugin) via Neovim's RPC interface.
+-- No nvim-side configuration needed.
