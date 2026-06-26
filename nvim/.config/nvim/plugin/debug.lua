@@ -47,7 +47,6 @@ local function load_debug_stack()
   require('mason-nvim-dap').setup {
     automatic_installation = true,
     handlers = {},
-    ensure_installed = ensure_installed,
   }
 
   dapui.setup {
@@ -90,7 +89,30 @@ local function load_debug_stack()
     outputMode = 'console',
   }
 
-  require('dap-python').setup 'python3'
+  require('dap-python').setup(vim.fn.stdpath 'data' .. '/mason/packages/debugpy/venv/bin/python')
+  require('dap-python').resolve_python = function()
+    local venv = os.getenv 'VIRTUAL_ENV'
+    if venv then
+      for _, py in ipairs { venv .. '/bin/python', venv .. '/bin/python3' } do
+        if vim.fn.executable(py) == 1 then return py end
+      end
+    end
+    -- walk up from cwd to find .venv (handles opening nvim from a subdirectory)
+    local venv_dir = vim.fn.finddir('.venv', vim.fn.getcwd() .. ';')
+    if venv_dir ~= '' then
+      local abs = vim.fn.fnamemodify(venv_dir, ':p')
+      for _, py in ipairs { abs .. 'bin/python', abs .. 'bin/python3' } do
+        if vim.fn.executable(py) == 1 then return py end
+      end
+    end
+    local uv_python = vim.trim(vim.fn.system 'uv python find 2>/dev/null')
+    if vim.v.shell_error == 0 and uv_python ~= '' then return uv_python end
+    return 'python3'
+  end
+
+  for _, config in ipairs(require('dap').configurations.python or {}) do
+    config.justMyCode = true
+  end
 
   is_loaded = true
   return true
@@ -104,10 +126,10 @@ local function with_dap(callback)
   end
 end
 
-vim.keymap.set('n', '<leader><F5>', with_dap(function() require('dap').continue() end), { desc = 'Debug: Start/Continue' })
-vim.keymap.set('n', '<leader><F10>', with_dap(function() require('dap').step_over() end), { desc = 'Debug: Step Over' })
-vim.keymap.set('n', '<leader><F11>', with_dap(function() require('dap').step_into() end), { desc = 'Debug: Step Into' })
-vim.keymap.set('n', '<leader><F12>', with_dap(function() require('dap').step_out() end), { desc = 'Debug: Step Out' })
+vim.keymap.set('n', '<leader>dc', with_dap(function() require('dap').continue() end), { desc = '[D]ebug: [c]ontinue / start' })
+vim.keymap.set('n', '<leader>do', with_dap(function() require('dap').step_over() end), { desc = '[D]ebug: step [o]ver' })
+vim.keymap.set('n', '<leader>di', with_dap(function() require('dap').step_into() end), { desc = '[D]ebug: step [i]nto' })
+vim.keymap.set('n', '<leader>dO', with_dap(function() require('dap').step_out() end), { desc = '[D]ebug: step [O]ut' })
 vim.keymap.set('n', '<leader>db', with_dap(function() require('dap').toggle_breakpoint() end), { desc = '[D]ebug: Toggle [b]reakpoint' })
 vim.keymap.set(
   'n',
@@ -116,5 +138,5 @@ vim.keymap.set(
   { desc = '[D]ebug: Set [B]reakpoint' }
 )
 vim.keymap.set('n', '<leader>dl', with_dap(function() require('dapui').toggle() end), { desc = '[D]ebug: See [l]ast session result.' })
-vim.keymap.set('n', '<leader>dq', with_dap(function() require('dapui').terminate() end), { desc = '[D]ebug [Q]uit.' })
+vim.keymap.set('n', '<leader>dq', with_dap(function() require('dap').terminate() end), { desc = '[D]ebug [Q]uit.' })
 vim.keymap.set('n', '<leader>dr', with_dap(function() require('dap').repl_open() end), { desc = '[D]ebug [r]epl open' })
