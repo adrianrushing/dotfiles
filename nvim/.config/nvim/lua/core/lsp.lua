@@ -127,7 +127,7 @@ function M.setup()
         analyses = { unusedparams = true },
       },
     },
-    ty = { completions = { autoImport = true } },
+    basedpyright = { settings = { analysis = { autoImportCompletions = true, typeCheckingMode = 'standard' } } },
     ruff = {
       on_attach = function(client)
         client.server_capabilities.hoverProvider = false
