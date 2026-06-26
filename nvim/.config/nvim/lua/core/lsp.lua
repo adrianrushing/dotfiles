@@ -157,7 +157,24 @@ function M.setup()
       },
     },
     tailwindcss = {},
-    biome = {},
+    eslint = {
+      on_attach = function(_, bufnr)
+        vim.api.nvim_create_autocmd('BufWritePre', {
+          buffer = bufnr,
+          command = 'EslintFixAll',
+        })
+      end,
+    },
+    cssls = {},
+    html = {},
+    emmet_language_server = {},
+    jsonls = {
+      settings = {
+        json = {
+          validate = { enable = true },
+        },
+      },
+    },
     lua_ls = {
       root_dir = lua_ls_root_dir,
       settings = {
@@ -172,7 +189,7 @@ function M.setup()
   local ensure_installed = vim.tbl_keys(servers)
   vim.list_extend(ensure_installed, {
     'stylua',
-    'biome',
+    'prettierd',
     'clangd',
   })
 

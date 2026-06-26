@@ -18,6 +18,17 @@ require('conform').setup {
     python = { 'ruff_fix', 'ruff_format' },
     sql = { 'sqlfluff' },
     go = { 'gofumpt', 'goimports-reviser', 'golines' },
+    javascript = { 'prettierd' },
+    javascriptreact = { 'prettierd' },
+    typescript = { 'prettierd' },
+    typescriptreact = { 'prettierd' },
+    css = { 'prettierd' },
+    scss = { 'prettierd' },
+    html = { 'prettierd' },
+    json = { 'prettierd' },
+    jsonc = { 'prettierd' },
+    yaml = { 'prettierd' },
+    markdown = { 'prettierd' },
   },
 }
 
