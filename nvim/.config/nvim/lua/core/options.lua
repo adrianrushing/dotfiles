@@ -8,6 +8,9 @@ vim.cmd 'filetype plugin on'
 vim.o.number = true
 vim.o.relativenumber = true
 
+-- Enable 24-bit RGB colors (required by nvim-colorizer and modern colorschemes)
+vim.o.termguicolors = true
+
 vim.o.mouse = 'a'
 
 -- Don't show the mode, since it's already in the status line

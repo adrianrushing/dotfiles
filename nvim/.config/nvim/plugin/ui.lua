@@ -26,7 +26,12 @@ require('which-key').setup {
   },
 }
 
-vim.notify = require 'notify'
+local notify = require 'notify'
+notify.setup {
+  top_down = false,
+}
+
+vim.notify = notify
 
 local alpha = require 'alpha'
 local dashboard = require 'alpha.themes.dashboard'
