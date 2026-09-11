@@ -157,6 +157,14 @@ function M.setup()
       },
     },
     tailwindcss = {},
+    biome = {
+      on_attach = function(client)
+        client.server_capabilities.definitionProvider = false
+        client.server_capabilities.typeDefinitionProvider = false
+        client.server_capabilities.referencesProvider = false
+        client.server_capabilities.implementationProvider = false
+      end,
+    },
     eslint = {
       on_attach = function(_, bufnr)
         vim.api.nvim_create_autocmd('BufWritePre', {
