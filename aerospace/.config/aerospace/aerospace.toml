@@ -45,7 +45,18 @@ automatically-unhide-macos-hidden-apps = false
 # even when they are invisible.
 # This config version is only available since 'config-version = 2'
 # Fallback value (if you omit the key): persistent-workspaces = []
-persistent-workspaces = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "C", "D", "I","M","S"]
+persistent-workspaces = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "C", "D", "I","M","S", "Z"]
+
+# Pin workspaces 8, 9, 0, S, M to the built-in display.
+# When only the built-in is connected, all workspaces land there anyway.
+# When an external display is connected, these stay on the built-in.
+# See: https://nikitabobko.github.io/AeroSpace/guide#assign-workspaces-to-monitors
+[workspace-to-monitor-force-assignment]
+    8 = 'built-in'
+    9 = 'built-in'
+    0 = 'built-in'
+    S = 'built-in'
+    M = 'built-in'
 
 # A callback that runs every time binding mode changes
 # See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
@@ -136,11 +147,13 @@ on-mode-changed = []
     cmd-ctrl-alt-7 = 'workspace 7'
     cmd-ctrl-alt-8 = 'workspace 8'
     cmd-ctrl-alt-9 = 'workspace 9'
+    cmd-ctrl-alt-0 = 'workspace 0'
     cmd-ctrl-alt-c = 'workspace C'
     cmd-ctrl-alt-d = 'workspace D'
     cmd-ctrl-alt-i = 'workspace I'
     cmd-ctrl-alt-m = 'workspace M'
     cmd-ctrl-alt-s = 'workspace S'
+    cmd-ctrl-alt-z = 'workspace Z'
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#move-node-to-workspace
    cmd-ctrl-alt-shift-1 = ['move-node-to-workspace 1', 'workspace 1']
@@ -152,11 +165,13 @@ on-mode-changed = []
    cmd-ctrl-alt-shift-7 = ['move-node-to-workspace 7', 'workspace 7']
    cmd-ctrl-alt-shift-8 = ['move-node-to-workspace 8', 'workspace 8']
    cmd-ctrl-alt-shift-9 = ['move-node-to-workspace 9', 'workspace 9']
+   cmd-ctrl-alt-shift-0 = ['move-node-to-workspace 0', 'workspace 0']
    cmd-ctrl-alt-shift-c = ['move-node-to-workspace C', 'workspace C']
    cmd-ctrl-alt-shift-d = ['move-node-to-workspace D', 'workspace D']
    cmd-ctrl-alt-shift-i = ['move-node-to-workspace I', 'workspace I']
    cmd-ctrl-alt-shift-m = ['move-node-to-workspace M', 'workspace M']
    cmd-ctrl-alt-shift-s = ['move-node-to-workspace S', 'workspace S']
+   cmd-ctrl-alt-shift-z = ['move-node-to-workspace Z', 'workspace Z']
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#workspace-back-and-forth
     cmd-ctrl-alt-tab = 'workspace-back-and-forth'
