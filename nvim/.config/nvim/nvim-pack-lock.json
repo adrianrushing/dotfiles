@@ -72,6 +72,10 @@
       "rev": "2431902e78b76f435542d1e606f08475360068ca",
       "src": "https://github.com/nvim-mini/mini.nvim"
     },
+    "minuet-ai.nvim": {
+      "rev": "50bf63b031c0391e926fdf0b3d044d37846e6e34",
+      "src": "https://github.com/milanglacier/minuet-ai.nvim"
+    },
     "neovim-session-manager": {
       "rev": "89d253a6c68af60b49570044591d5b8701866601",
       "src": "https://github.com/Shatur/neovim-session-manager"
