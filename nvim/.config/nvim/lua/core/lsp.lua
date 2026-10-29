@@ -211,6 +211,8 @@ function M.setup()
     'goimports-reviser',
     'golines',
     'sqlfluff',
+    'markdownlint',
+    'jsonlint',
   })
 
   require('mason-tool-installer').setup {
