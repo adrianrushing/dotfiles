@@ -15,11 +15,6 @@ require('conform').setup {
     -- Without this, conform runs biome even where no biome.json exists (falling
     -- back to the buffer's expandtab), so prettierd would never be reached.
     biome = { require_cwd = true },
-    prettierd = {
-      env = {
-        PRETTIERD_DEFAULT_CONFIG = vim.fn.stdpath('config') .. '/.prettierrc.yaml',
-      },
-    },
   },
   formatters_by_ft = {
     c = { 'clang_format' },
@@ -39,7 +34,6 @@ require('conform').setup {
     scss = { 'prettierd' },
     html = { 'prettierd' },
     yaml = { 'prettierd' },
-    markdown = { 'prettierd' },
   },
 }
 
