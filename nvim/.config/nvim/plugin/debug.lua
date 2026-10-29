@@ -21,7 +21,58 @@ local function load_debug_stack()
 
   local dap = require 'dap'
   local dapui = require 'dapui'
-  local ensure_installed = { 'delve', 'debugpy', 'codelldb' }
+  local ensure_installed = { 'delve', 'debugpy', 'codelldb', 'js-debug-adapter' }
+
+  -- Microsoft's JavaScript debugger speaks DAP for Node, Chrome, and Edge.
+  -- Mason's wrapper starts its server on the port selected by nvim-dap.
+  local js_adapter = {
+    type = 'server',
+    host = '127.0.0.1',
+    port = '${port}',
+    executable = {
+      command = vim.fn.stdpath 'data' .. '/mason/bin/js-debug-adapter',
+      args = { '${port}', '127.0.0.1' },
+    },
+  }
+  for _, adapter in ipairs { 'pwa-node', 'pwa-chrome', 'pwa-msedge', 'node-terminal' } do
+    dap.adapters[adapter] = js_adapter
+  end
+
+  -- VS Code now writes `chrome`, `msedge`, and `node` in many launch.json
+  -- files, while vscode-js-debug's DAP server still expects the pwa names.
+  -- Rewrite those types just before starting the adapter.
+  for short_type, pwa_type in pairs {
+    chrome = 'pwa-chrome',
+    msedge = 'pwa-msedge',
+    node = 'pwa-node',
+  } do
+    dap.adapters[short_type] = function(callback, config)
+      config.type = pwa_type
+      callback(dap.adapters[pwa_type])
+    end
+  end
+
+  local browser_configurations = {
+    {
+      name = 'Browser: launch Chrome',
+      type = 'pwa-chrome',
+      request = 'launch',
+      url = function() return vim.fn.input('URL: ', 'http://localhost:5173') end,
+      webRoot = '${workspaceFolder}',
+      sourceMaps = true,
+    },
+    {
+      name = 'Browser: attach to Chrome (port 9222)',
+      type = 'pwa-chrome',
+      request = 'attach',
+      port = 9222,
+      webRoot = '${workspaceFolder}',
+      sourceMaps = true,
+    },
+  }
+  for _, language in ipairs { 'javascript', 'javascriptreact', 'typescript', 'typescriptreact' } do
+    dap.configurations[language] = vim.deepcopy(browser_configurations)
+  end
 
   dap.adapters.codelldb = {
     type = 'server',
