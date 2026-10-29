@@ -1,8 +1,8 @@
 vim.pack.add { 'https://github.com/benomahony/uv.nvim' }
 
 require('uv').setup {
-  auto_activate_venv = true,
-  notify_activate_venv = true,
+  auto_activate_venv = false,
+  notify_activate_venv = false,
   auto_commands = true,
   picker_integration = true,
   keymaps = {
