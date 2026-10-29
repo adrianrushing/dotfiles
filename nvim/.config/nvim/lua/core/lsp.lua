@@ -82,52 +82,49 @@ function M.setup()
       spacing = 2,
       format = function(diagnostic) return diagnostic.message end,
     },
-    jump = { float = true },
+    jump = {
+      on_jump = function(diagnostic, bufnr)
+        if diagnostic then vim.diagnostic.open_float { bufnr = bufnr, scope = 'cursor', focus = false } end
+      end,
+    },
   }
 
   local blink_ok, blink = pcall(require, 'blink.cmp')
   local capabilities = blink_ok and blink.get_lsp_capabilities() or vim.lsp.protocol.make_client_capabilities()
-  local util = require 'lspconfig.util'
 
-  local lua_project_root = util.root_pattern('.luarc.json', '.luarc.jsonc', '.git', '.stylua.toml', 'stylua.toml', 'selene.toml', 'lua', 'init.lua')
-
-  local function lua_ls_root_dir(fname)
-    local root = lua_project_root(fname)
-    if not root then return nil end
-
-    local homedir = (vim.uv or vim.loop).os_homedir()
-    if not homedir then return root end
-
-    local normalized_root = vim.fs.normalize(root)
-    local normalized_home = vim.fs.normalize(homedir)
-    if normalized_root == normalized_home then return nil end
-
-    return root
+  -- Run lspconfig's own on_attach (which defines commands like LspEslintFixAll)
+  -- before ours, instead of replacing it.
+  local function extend_on_attach(server_name, fn)
+    local base = vim.lsp.config[server_name] and vim.lsp.config[server_name].on_attach
+    return function(client, bufnr)
+      if base then base(client, bufnr) end
+      fn(client, bufnr)
+    end
   end
 
   local servers = {
-    clangd = { cmd = { 'clangd', '--background-index', '--cland-tidy', '--completion-style=detailed', '--header-insertion=iwyu' } },
+    clangd = { cmd = { 'clangd', '--background-index', '--clang-tidy', '--completion-style=detailed', '--header-insertion=iwyu' } },
     gopls = {
-      filetypes = { 'go', 'gomod', 'gowork', 'gotmpl' },
-      cmd = { 'gopls' },
-      root_dir = util.root_pattern('go.work', 'go.mod', '.git'),
       settings = {
-        hints = {
-          rangeVariableTypes = true,
-          parameterNames = true,
-          ignoredError = true,
-          functionTypeParameters = true,
-          constantValues = true,
-          compositeLiteralTypes = true,
-          compositeLiteralFields = true,
-          assignVariableTypes = true,
+        gopls = {
+          hints = {
+            rangeVariableTypes = true,
+            parameterNames = true,
+            ignoredError = true,
+            functionTypeParameters = true,
+            constantValues = true,
+            compositeLiteralTypes = true,
+            compositeLiteralFields = true,
+            assignVariableTypes = true,
+          },
+          completeUnimported = true,
+          usePlaceholders = true,
+          analyses = { unusedparams = true },
         },
-        completeUnimported = true,
-        usePlaceholders = true,
-        analyses = { unusedparams = true },
       },
     },
-    basedpyright = { settings = { analysis = { autoImportCompletions = true, typeCheckingMode = 'standard' } } },
+    -- No pythonPath: basedpyright picks up <root_dir>/.venv on its own.
+    basedpyright = { settings = { basedpyright = { analysis = { autoImportCompletions = true, typeCheckingMode = 'standard' } } } },
     ruff = {
       on_attach = function(client)
         client.server_capabilities.hoverProvider = false
@@ -135,10 +132,10 @@ function M.setup()
       end,
     },
     ts_ls = {
-      capabilities = {
-        documentFormattingProvider = false,
-        documentRangeFormattingProvider = false,
-      },
+      on_attach = extend_on_attach('ts_ls', function(client)
+        client.server_capabilities.documentFormattingProvider = false
+        client.server_capabilities.documentRangeFormattingProvider = false
+      end),
       settings = {
         typescript = {
           implementationsCodeLens = true,
@@ -158,20 +155,20 @@ function M.setup()
     },
     tailwindcss = {},
     biome = {
-      on_attach = function(client)
+      on_attach = extend_on_attach('biome', function(client)
         client.server_capabilities.definitionProvider = false
         client.server_capabilities.typeDefinitionProvider = false
         client.server_capabilities.referencesProvider = false
         client.server_capabilities.implementationProvider = false
-      end,
+      end),
     },
     eslint = {
-      on_attach = function(_, bufnr)
+      on_attach = extend_on_attach('eslint', function(_, bufnr)
         vim.api.nvim_create_autocmd('BufWritePre', {
           buffer = bufnr,
-          command = 'EslintFixAll',
+          command = 'LspEslintFixAll',
         })
-      end,
+      end),
     },
     cssls = {},
     html = {},
@@ -184,7 +181,11 @@ function M.setup()
       },
     },
     lua_ls = {
-      root_dir = lua_ls_root_dir,
+      -- Same markers as before, but never treat $HOME itself as a project.
+      root_dir = function(bufnr, on_dir)
+        local root = vim.fs.root(bufnr, { '.luarc.json', '.luarc.jsonc', '.git', '.stylua.toml', 'stylua.toml', 'selene.toml', 'lua', 'init.lua' })
+        if root and vim.fs.normalize(root) ~= vim.fs.normalize(vim.uv.os_homedir()) then on_dir(root) end
+      end,
       settings = {
         Lua = {
           completion = {},
@@ -194,11 +195,22 @@ function M.setup()
     marksman = {},
   }
 
+  -- mason-lspconfig v2 ignores `handlers`; it only calls vim.lsp.enable(). So the
+  -- per-server config has to be registered with vim.lsp.config() up front.
+  for name, server in pairs(servers) do
+    server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
+    vim.lsp.config(name, server)
+  end
+
   local ensure_installed = vim.tbl_keys(servers)
   vim.list_extend(ensure_installed, {
     'stylua',
     'prettierd',
-    'clangd',
+    'clang-format',
+    'gofumpt',
+    'goimports-reviser',
+    'golines',
+    'sqlfluff',
   })
 
   require('mason-tool-installer').setup {
@@ -208,17 +220,7 @@ function M.setup()
     start_delay = 3000,
   }
 
-  require('mason-lspconfig').setup {
-    ensure_installed = {},
-    automatic_installation = true,
-    handlers = {
-      function(server_name)
-        local server = servers[server_name] or {}
-        server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
-        require('lspconfig')[server_name].setup(server)
-      end,
-    },
-  }
+  require('mason-lspconfig').setup()
 end
 
 return M
