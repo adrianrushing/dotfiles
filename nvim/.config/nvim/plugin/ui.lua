@@ -11,7 +11,49 @@ require('tokyonight').setup {
   },
 }
 
-vim.cmd.colorscheme 'tokyonight-night'
+local theme_link = vim.fn.expand '~/.config/theme/current'
+local last_theme_mode
+
+local function theme_mode()
+  local target = vim.uv.fs_readlink(theme_link)
+  if target and target:match 'light$' then
+    return 'light'
+  end
+  return 'dark'
+end
+
+local function apply_theme(force)
+  local mode = theme_mode()
+  if not force and mode == last_theme_mode then
+    return
+  end
+
+  last_theme_mode = mode
+  vim.o.background = mode
+  vim.cmd.colorscheme(mode == 'light' and 'tokyonight-day' or 'tokyonight-night')
+end
+
+apply_theme(true)
+
+vim.api.nvim_create_user_command('ThemeToggle', function()
+  local script = vim.fn.expand '~/.local/bin/theme-toggle'
+  local output = vim.fn.system { script }
+  if vim.v.shell_error ~= 0 then
+    vim.notify(output, vim.log.levels.ERROR)
+    return
+  end
+  apply_theme(true)
+  vim.notify(vim.trim(output))
+end, { desc = 'Toggle TokyoNight light/dark mode' })
+
+vim.keymap.set('n', '<leader>tt', '<cmd>ThemeToggle<CR>', { desc = '[T]oggle color theme' })
+
+vim.api.nvim_create_autocmd({ 'FocusGained', 'TermLeave' }, {
+  desc = 'Follow the shared TokyoNight mode',
+  callback = function()
+    apply_theme(false)
+  end,
+})
 
 require('which-key').setup {
   delay = 0,

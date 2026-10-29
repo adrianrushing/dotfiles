@@ -1,0 +1,6 @@
+# Default to dark until theme-toggle creates the shared current-theme link.
+theme = TokyoNight Night
+config-file = ?../theme/current/ghostty.conf
+
+# Send macOS Option key combinations to terminal applications as Alt/Meta.
+macos-option-as-alt = true
