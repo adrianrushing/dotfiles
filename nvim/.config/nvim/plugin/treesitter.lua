@@ -25,7 +25,16 @@ local filetypes = {
 }
 
 require('nvim-treesitter').install(filetypes)
+
+-- `filetypes` holds parser names; FileType events use filetype names (tsx ->
+-- typescriptreact, vimdoc -> help, ...), so map them before building the pattern.
+local patterns = {}
+for _, lang in ipairs(filetypes) do
+  vim.list_extend(patterns, vim.treesitter.language.get_filetypes(lang))
+end
+
 vim.api.nvim_create_autocmd('FileType', {
-  pattern = filetypes,
-  callback = function() vim.treesitter.start() end,
+  pattern = patterns,
+  -- pcall: on first launch the parser may still be installing.
+  callback = function() pcall(vim.treesitter.start) end,
 })
