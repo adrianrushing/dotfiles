@@ -6,6 +6,16 @@ vim.pack.add {
 }
 
 if vim.fn.executable 'make' == 1 then
+  -- vim.pack doesn't run build steps, so compile fzf-native on install/update.
+  -- Must be registered before vim.pack.add so it fires on first install.
+  vim.api.nvim_create_autocmd('PackChanged', {
+    callback = function(ev)
+      local spec = ev.data.spec
+      if spec.name == 'telescope-fzf-native.nvim' and (ev.data.kind == 'install' or ev.data.kind == 'update') then
+        vim.system({ 'make' }, { cwd = ev.data.path }):wait()
+      end
+    end,
+  })
   vim.pack.add { 'https://github.com/nvim-telescope/telescope-fzf-native.nvim' }
 end
 
