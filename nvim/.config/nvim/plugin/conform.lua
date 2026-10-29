@@ -3,7 +3,7 @@ vim.pack.add { 'https://github.com/stevearc/conform.nvim' }
 require('conform').setup {
   notify_on_error = false,
   format_on_save = function(bufnr)
-    local disable_filetypes = { c = true, cpp = true }
+    local disable_filetypes = { c = true, cpp = true, markdown = true }
     if disable_filetypes[vim.bo[bufnr].filetype] then return nil end
 
     return {
@@ -15,6 +15,11 @@ require('conform').setup {
     -- Without this, conform runs biome even where no biome.json exists (falling
     -- back to the buffer's expandtab), so prettierd would never be reached.
     biome = { require_cwd = true },
+    prettierd = {
+      env = {
+        PRETTIERD_DEFAULT_CONFIG = vim.fn.stdpath('config') .. '/.prettierrc.yaml',
+      },
+    },
   },
   formatters_by_ft = {
     c = { 'clang_format' },
